@@ -1,4 +1,4 @@
-# Parser (CS50 AI)
+# Context-free Parser
 
 This project implements a context-free grammar parser for English sentences. It's designed to analyze sentence structure, identify noun phrases, and demonstrate natural language processing capabilities. Part of CS50's Introduction to Artificial Intelligence with Python.
 
