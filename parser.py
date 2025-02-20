@@ -74,6 +74,25 @@ def preprocess(sentence):
     
     return word_list
 
+def recursive_np_chunk(np_chunk_list, ptree):
+        # If leaf, return True if chunk 
+        if len(ptree) == 1:
+            if ptree.label() == "NP":
+                np_chunk_list.append(ptree)
+                return True
+            return False
+
+        chunk_counter = 0
+        for sub_tree in ptree:
+            if (recursive_np_chunk(np_chunk_list, sub_tree)):
+                chunk_counter += 1
+        
+        if chunk_counter == 1 and ptree.label() == "NP":
+            np_chunk_list.append(ptree)
+            return True
+        return False
+            
+
 def np_chunk(tree):
     """
     Return a list of all noun phrase chunks in the sentence tree.
@@ -81,8 +100,11 @@ def np_chunk(tree):
     whose label is "NP" that does not itself contain any other
     noun phrases as subtrees.
     """
-    raise NotImplementedError
-
+    
+    ret_list = []
+    recursive_np_chunk(ret_list, tree)
+    
+    return ret_list
 
 if __name__ == "__main__":
     main()
